@@ -22,14 +22,19 @@ def test_cli_bg_one_int():
     runner = CliRunner()
     result = runner.invoke(cli, ["bg", "50"])
     assert result.exit_code == 0
-    assert "(50, 0, 0)" in result.output, "Single int arg is used as red value, green and blue default to 0"
+    assert (
+        "(50, 0, 0)" in result.output
+    ), "Single int arg is used as red value, green and blue default to 0"
 
 
 def test_cli_bg_one_int():
     runner = CliRunner()
     result = runner.invoke(cli, ["bg", "55", "66"])
     assert result.exit_code == 0
-    assert "(55, 66, 0)" in result.output, "2 int arg is used as red and green, blue defaults to 0"
+    assert (
+        "(55, 66, 0)" in result.output
+    ), "2 int arg is used as red and green, blue defaults to 0"
+
 
 def test_cli_bg_three_ints():
     runner = CliRunner()

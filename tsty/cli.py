@@ -12,31 +12,34 @@ from tsty.utils import apple
 
 
 COLOR_PRESETS = {
-    'blue': (0, 0, 80),
-    'green': (0, 80, 0),
-    'red': (80, 0, 0),
-    'pink': (150, 80, 80),
-    'lavender': (80, 50, 95),
-    'purple': (50, 0, 50),
-    'gray': (50, 50, 50),
-    'black': (0, 0, 0),
-    'white': (225, 225, 225),
+    "blue": (0, 0, 80),
+    "green": (0, 80, 0),
+    "red": (80, 0, 0),
+    "pink": (150, 80, 80),
+    "lavender": (80, 50, 95),
+    "purple": (50, 0, 50),
+    "gray": (50, 50, 50),
+    "black": (0, 0, 0),
+    "white": (225, 225, 225),
 }
+
 
 def load_quiet_option(func):
     """Decorator to add a quiet option to a command."""
-    @click.option('--quiet', '-q', is_flag=True, help="Silence verbose stderr output.")
+
+    @click.option("--quiet", "-q", is_flag=True, help="Silence verbose stderr output.")
     @wraps(func)
     def wrapper(*args, **kwargs):
-        quiet = kwargs.pop('quiet', False)
+        quiet = kwargs.pop("quiet", False)
         ctx = click.get_current_context()
         ctx.ensure_object(dict)
-        ctx.obj['quiet'] = quiet
+        ctx.obj["quiet"] = quiet
         return func(*args, **kwargs)
+
     return wrapper
 
 
-def resolve_potential_color_preset_name(textval:str) -> Union[str, None]:
+def resolve_potential_color_preset_name(textval: str) -> Union[str, None]:
     if textval.isdigit():
         return None
 
@@ -50,18 +53,18 @@ def resolve_potential_color_preset_name(textval:str) -> Union[str, None]:
         return next((n for n in preset_names if re.match(txt, n)), None)
 
 
-
 def verbose_echo(message, **kwargs) -> None:
     """
     Custom echo function that checks quiet flag from context
     """
     ctx = click.get_current_context()
-    if ctx.obj and ctx.obj.get('quiet') is not True:
-         click.secho(message, err=True, **kwargs)
+    if ctx.obj and ctx.obj.get("quiet") is not True:
+        click.secho(message, err=True, **kwargs)
 
 
 class DefaultRichGroup(DefaultGroup):
     """Make `click-default-group` work with `rick-click`."""
+
 
 @click.version_option()
 @click.group(cls=DefaultRichGroup, default="bg", default_if_no_args=True)
@@ -69,19 +72,13 @@ def cli():
     pass
 
 
-
 @cli.command()
 @load_quiet_option
-@click.argument(
-    "color",
-    nargs=-1,
-    type=click.STRING
-)
+@click.argument("color", nargs=-1, type=click.STRING)
 def bg(color):
     """
     pass in r g b values
     """
-
 
     if len(color) == 0:
         cvals = (0, 0, 0)
@@ -96,7 +93,9 @@ def bg(color):
             cvals = tuple(int(c) for c in (*color, 0, 0)[:3])
             verbose_echo(f"RGB: {cvals}")
         else:
-            raise ValueError(f"Expected `color` to be either a preset, or 1 to 3 RGB integers. Got: {color}")
+            raise ValueError(
+                f"Expected `color` to be either a preset, or 1 to 3 RGB integers. Got: {color}"
+            )
 
     r, g, b = cvals
 
@@ -104,6 +103,7 @@ def bg(color):
     color_cmd = apple.get_color_change_command(r, g, b)
     verbose_echo(f"applescript:\n    {color_cmd}")
     apple.run_command(color_cmd)
+
 
 if __name__ == "__main__":
     cli()
