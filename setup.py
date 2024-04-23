@@ -37,7 +37,7 @@ setup(
     extras_require={
         "test": [
             "pytest",
-            "pytest-mock",`
+            "pytest-mock",
             "black>=24.2.0",
             "types-click",
         ]
