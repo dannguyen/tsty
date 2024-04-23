@@ -6,8 +6,8 @@ from functools import wraps
 
 from typing import Tuple, List, Union
 
-from .utils import apple
-from .utils.common import COLOR_PRESETS, resolve_fuzzy_color_preset_name
+from tsty.utils import apple
+from tsty.utils.common import COLOR_PRESETS, resolve_fuzzy_color_preset_name
 
 
 def load_quiet_option(func):
@@ -73,13 +73,19 @@ def bg(color):
     Change background color
 
     USAGE:
-    # change background to black (default)
+
+    Change background to black (default)
+
     $ tsty bg
 
-    # change background to rgb of 100,200,0
+
+    Change background to rgb of 100,200,0
+
     $ tsty bg 100 200
 
-    # change background to "pink"
+
+    Change background to "pink"
+
     $ tsty bg pink
 
     Pass in 1-3 int values for RGB, or color name like "red" or "lavender"
@@ -103,8 +109,15 @@ def cursor(color):
     Change cursor color
 
     USAGE:
-    # change cursor to orange (default)
+
+
+    Change cursor to default color (orange)
+
     $ tsty cursor
+
+    Change cursor to pink
+
+    $ tsty cursor pink
     """
 
     r, g, b = parse_color_arg(color, default_vals=(200, 130, 0))
@@ -145,15 +158,23 @@ def text(color, bold, normal):
     Change text color (bold and/or normal)
 
     USAGE:
-    # change bold and normal text to 255,255,255 (white is default)
+
+
+    Change bold and normal text to 255,255,255 (white is default)
+
     $ tsty text
+
     $ tsty text 255 255 255
+
     $ tsty text white
 
-    # change just bold text to green
+
+    Change just bold text to green
+
     $ tsty text green --bold
 
     # change just normal text to 100,200,255
+
     $ tsty text 100 200 --normal
 
 

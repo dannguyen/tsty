@@ -1,7 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
 
-VERSION = "0.0.5.1"
+VERSION = "0.0.5.2"
 
 
 def get_long_description():
@@ -10,7 +10,6 @@ def get_long_description():
         encoding="utf8",
     ) as fp:
         return fp.read()
-
 
 setup(
     name="tsty",
@@ -26,7 +25,7 @@ setup(
     },
     license="Apache License, Version 2.0",
     version=VERSION,
-    packages=["tsty"],
+    packages=find_packages(exclude=["tests", "tests.*"]),
     entry_points="""
         [console_scripts]
         tsty=tsty.cli:cli
@@ -34,14 +33,11 @@ setup(
     install_requires=[
         "click>=8.1",
         "click-default-group>=1.2.3",
-        "setuptools",
-        "pip",
-        "pyreadline3; sys_platform == 'win32'",
     ],
     extras_require={
         "test": [
             "pytest",
-            "pytest-mock",
+            "pytest-mock",`
             "black>=24.2.0",
             "types-click",
         ]

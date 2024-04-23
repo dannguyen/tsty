@@ -44,7 +44,7 @@ tsty list
 - finish writing tests
     - throw error when user has more than 4 values for color argument
     - throw error when user has more than 1 non-numerical value for color argument
-
+- Replace verbose-by-default with --verbose opt-in flag (i.e. deprecate --quiet)
 
 
 
