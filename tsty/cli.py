@@ -6,8 +6,8 @@ from functools import wraps
 
 from typing import Tuple, List, Union
 
-from tsty.utils import apple
-from tsty.utils.common import COLOR_PRESETS, resolve_fuzzy_color_preset_name
+from .utils import apple
+from .utils.common import COLOR_PRESETS, resolve_fuzzy_color_preset_name
 
 
 def load_quiet_option(func):
