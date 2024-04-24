@@ -13,7 +13,7 @@ tsty bg green
 ## by default, the tsty command runs the `bg` subcommand, so this works too:
 tsty green
 
-## you can also pass in rgb values, in order of: r g b 
+## you can also pass in rgb values, in order of: r g b
 tsty 0 100
 
 # Change text color — both bold and normal — to orange
@@ -37,7 +37,8 @@ tsty list
 ## TODOS
 
 - Add ability to switch themes
-- Make it compatible with Windows Powershell/WSL 
+- Make it compatible with Windows Powershell/WSL
+    - note: this [ColorTool issue from 2019](https://github.com/microsoft/terminal/issues/1160) seems unresolved and I was unable to change my WSL ubuntu terminal bg using the `-x` flag
 - Make it compatible with Linux terminals
 - Make separate color presets for background/cursor and text, as the former generally needs to be darker and the latter more brighter
 - make aliases, e.g. `tsty t` for `tsty text`
